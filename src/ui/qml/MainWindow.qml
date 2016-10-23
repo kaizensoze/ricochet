@@ -144,5 +144,10 @@ ApplicationWindow {
         shortcut: StandardKey.Close
         onTriggered: window.close()
     }
+    
+    Action {
+        shortcut: "Ctrl+M"
+        onTriggered: window.showMinimized()
+    }
 }
 

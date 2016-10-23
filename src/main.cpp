@@ -54,6 +54,10 @@ static bool initSettings(SettingsFile *settings, QLockFile **lockFile, QString &
 static bool importLegacySettings(SettingsFile *settings, const QString &oldPath);
 static void initTranslation();
 
+#ifdef Q_OS_MAC
+extern void qt_set_sequence_auto_mnemonic(bool b);
+#endif
+
 int main(int argc, char *argv[])
 {
     /* Disable rwx memory.
@@ -67,6 +71,10 @@ int main(int argc, char *argv[])
 
 #if !defined(Q_OS_WIN) && !defined(Q_OS_MAC)
     a.setWindowIcon(QIcon(QStringLiteral(":/icons/ricochet.svg")));
+#endif
+
+#ifdef Q_OS_MAC
+    qt_set_sequence_auto_mnemonic(true);
 #endif
 
     QScopedPointer<SettingsFile> settings(new SettingsFile);
